@@ -1,0 +1,851 @@
+:root {
+    --primary-color: #d1495b; /* Deep romantic red */
+    --text-color: #2c3e50;
+    --bg-gradient: linear-gradient(to bottom, #fff0f3, #ffe6e9);
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    color: var(--text-color);
+    background: var(--bg-gradient);
+    overflow-x: hidden;
+}
+
+/* --- Full Screen Scroll Layout --- */
+.scroll-container {
+    /* Optional: Remove these two lines if you don't want strict "snap" scrolling */
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.full-screen-section {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    scroll-snap-align: start;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content-wrapper {
+    max-width: 1000px;
+    width: 100%;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* --- Typography --- */
+h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.2em;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(209, 73, 91, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(209, 73, 91, 0.4);
+}
+
+.music-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-body);
+}
+
+/* --- Gallery (Polaroid) --- */
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.polaroid {
+    background: white;
+    padding: 15px 15px 40px 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 250px;
+}
+
+.polaroid img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.caption {
+    margin-top: 15px;
+    font-family: 'Playfair Display', serif; /* Handwritten feel */
+    color: #333;
+    font-style: italic;
+}
+
+.polaroid:hover {
+    transform: scale(1.05) rotate(-2deg);
+    z-index: 10;
+}
+
+/* --- Letters --- */
+.envelope-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.envelope {
+    width: 220px;
+    height: 150px;
+    background: #eebbbb;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+    background: #d1495b;
+}
+
+.envelope p {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* --- Timeline --- */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+}
+
+/* Vertical line */
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #e0e0e0;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.checkpoint {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    width: 300px;
+    position: relative;
+    z-index: 1;
+}
+
+.checkpoint h3 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+}
+
+.checkpoint p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* --- Modals & Overlays --- */
+.modal, .overlay {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(255,255,255,0.95);
+}
+
+.modal-content {
+    margin: 5% auto;
+    display: block;
+    max-height: 80vh;
+    max-width: 90%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+#modal-caption {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: var(--primary-color);
+}
+
+.paper {
+    background: #fff;
+    width: 80%;
+    max-width: 600px;
+    padding: 60px;
+    margin: 10vh auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.close-btn, .close-paper {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.hidden { display: none; }
+.overlay.hidden { display: none; } /* Specificity fix */
+.overlay { display: block; } /* Default state if not hidden */
+
+/* --- Animations --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hearts-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* --- Special Shayri Section --- */
+
+/* The Button Style */
+.btn.secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    margin-top: 30px;
+}
+
+.btn.secondary:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* The Paper Card Look */
+/* --- Special Shayri Section (FIXED SCROLL) --- */
+
+.paper-card {
+    background: #fffdf0;
+    padding: 40px; /* Slightly reduced padding to give more room */
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 5px;
+    position: relative;
+    border: 1px solid #e0d0c0;
+    
+    /* NEW: Scroll Logic */
+    max-height: 70vh; /* Limits height to 70% of screen */
+    overflow-y: auto; /* Adds scrollbar if text is too long */
+    
+    /* Scrollbar Styling for Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) #fffdf0;
+}
+
+/* Custom Scrollbar for Chrome/Safari */
+.paper-card::-webkit-scrollbar {
+    width: 8px;
+}
+.paper-card::-webkit-scrollbar-track {
+    background: #fffdf0;
+    border-radius: 4px;
+}
+.paper-card::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    border: 2px solid #fffdf0;
+}
+
+.shayri-text {
+    font-family: 'Special Elite', 'Courier New', monospace;
+    font-size: 1.4rem; /* Adjusted slightly for better fit */
+    line-height: 1.8;
+    color: #4a4a4a;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.paper-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--primary-color);
+    display: inline-block;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.signature {
+    font-family: 'Special Elite', monospace;
+    text-align: right;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+    .paper-card {
+        padding: 20px;
+        width: 90%;
+        max-height: 65vh; /* Smaller height on mobile to avoid touching edges */
+    }
+    .shayri-text {
+        font-size: 1.1rem; /* Smaller font on phone */
+    }
+}
+/* --- New Timer Styles --- */
+.timer-box {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 20px 40px; /* Wider padding */
+    border-radius: 15px;
+    margin: 20px auto 40px auto; /* 40px bottom margin pushes button down */
+    display: block; /* Ensures it takes its own line block context */
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #fff;
+}
+
+.timer-label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #555;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#timer-display {
+    font-family: 'Special Elite', monospace; /* Typewriter font */
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* --- Music Button Spin Animation --- */
+.music-btn {
+    transition: transform 0.5s ease;
+}
+
+.music-btn.playing {
+    animation: spin 4s linear infinite;
+    background-color: #ffe6e9;
+    border-color: #ff4d6d;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile Fix for Timer */
+@media (max-width: 768px) {
+    #timer-display {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- NEW Scratch Card Styles --- */
+.coupon-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+/* The wrapper that holds both the prize and the canvas overlay */
+.scratch-container {
+    position: relative;
+    width: 250px;
+    height: 150px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    /* Kept a slight rotation for style */
+    transform: rotate(-2deg);
+    transition: transform 0.3s;
+}
+
+.scratch-container:hover {
+    transform: scale(1.05) rotate(0deg);
+}
+
+/* The Hidden Prize (Bottom Layer) */
+.prize-content {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #fff0f3; /* Light pink background for revealed prize */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Sits below canvas */
+    border: 3px solid var(--primary-color);
+    box-sizing: border-box;
+}
+
+.prize-content h3 {
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    margin: 0 0 10px 0;
+}
+
+/* The Scratchable Surface (Top Layer) */
+.scratch-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2; /* Sits on top */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewport="0 0 32 32" style="fill:black;font-size:24px"><text y="28">🪙</text></svg>') 16 16, auto; /* Coin cursor */
+    transition: opacity 0.5s;
+}
+
+/* Text on top of the foil before scratching */
+.scratch-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    font-weight: bold;
+    color: #666;
+    pointer-events: none; /* Ignores clicks so you can scratch through it */
+    font-family: 'Special Elite', monospace;
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 2px white;
+}
+
+/* Class added by JS when fully scratched */
+.revealed .scratch-canvas,
+.revealed .scratch-overlay-text {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* --- 3D Flipbook Album Styles --- */
+
+.book-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    perspective: 2000px; /* Essential for 3D effect */
+    margin-top: 20px;
+}
+
+.book {
+    position: relative;
+    width: 400px;  /* Width of closed book */
+    height: 550px; /* Height of book */
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left; /* Flips from the spine */
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 0 10px 10px 0; /* Rounded outer edges */
+}
+
+/* Front and Back of each page */
+.front, .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides the reverse side */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Paper texture */
+    background-color: #fffdf0;
+    border: 1px solid #e0e0e0;
+}
+
+/* The back side needs to be rotated already so it matches the flip */
+.back {
+    transform: rotateY(180deg);
+    border-radius: 10px 0 0 10px; /* Reverse rounded edges */
+}
+
+/* Page Content Styling */
+.cover-page {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0 10px 10px 0;
+}
+
+.cover-page h3 { color: white; border-bottom: 2px solid white; }
+
+.page img {
+    width: 90%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transform: rotate(-2deg); /* Scrapbook tilt */
+}
+
+.handwritten {
+    font-family: 'Special Elite', cursive; /* Your typewriter font */
+    margin-top: 20px;
+    color: #555;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Flipped State (Controlled by JS) */
+.flipped {
+    transform: rotateY(-180deg);
+}
+
+/* Navigation Buttons */
+.nav-btn {
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    z-index: 10;
+}
+.nav-btn:hover { transform: scale(1.1); background: white; }
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .book { width: 300px; height: 420px; }
+    .book-container { gap: 10px; }
+}
+
+/* --- Vintage Letter Animation Styles --- */
+
+/* 1. The Moving Title */
+#letters-title {
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.title-up {
+    transform: translateY(-15vh) scale(0.8); /* Moves up and shrinks slightly */
+}
+
+/* 2. Hide Envelopes when letter opens */
+.envelope-grid {
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.envelopes-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
+}
+
+/* 3. The Vintage Letter Container */
+.vintage-letter {
+    position: absolute;
+    top: 55%; /* Start slightly below center */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Takes up most width */
+    max-width: 600px;
+    height: 0; /* Start closed (height 0) */
+    background: #f4e4bc; /* Parchment color */
+    /* CSS Gradient to make it look like a curved scroll */
+    background-image: linear-gradient(to right, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 60px rgba(160, 82, 45, 0.1);
+    border-top: 5px solid #8b4513; /* Wood/Leather rod look at top */
+    border-bottom: 5px solid #8b4513; /* Wood/Leather rod look at bottom */
+    overflow: hidden;
+    z-index: 20;
+    transition: height 1.5s cubic-bezier(0.25, 1, 0.5, 1); /* Slow unfurl animation */
+    padding: 0 40px; /* Padding for text, but hidden initially */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Class added via JS to open it */
+.vintage-letter.open {
+    height: 70vh; /* Takes up vertical screen space */
+}
+
+/* 4. The Content Inside */
+.scroll-content {
+    opacity: 0; /* Hidden until scroll is open */
+    transition: opacity 1s ease 1s; /* Delay appearance until scroll finishes */
+    text-align: center;
+}
+
+.vintage-letter.open .scroll-content {
+    opacity: 1;
+}
+
+.handwritten-text {
+    font-family: 'Dancing Script', cursive; /* Elegant cursive font */
+    font-size: 1.8rem;
+    line-height: 1.6;
+    color: #4a3b2a; /* Dark brown ink color */
+}
+
+/* 5. Close Button */
+.close-letter {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #8b4513;
+    opacity: 0.6;
+    z-index: 30;
+}
+.close-letter:hover { opacity: 1; }
+
+/* 6. Wax Seal Decoration on envelopes */
+.wax-seal {
+    width: 30px; height: 30px;
+    background: #d1495b;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.2);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+/* Add cursive font for the royal feel */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+
+/* --- Neon Preloader Styles --- */
+
+/* --- Neon Preloader Styles (Fixed Centering & Slower Speed) --- */
+
+/* 1. The Container covering the screen */
+#preloader {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000; /* Pure Black Background */
+    z-index: 9999; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.5s ease-out, visibility 1.5s ease-out; /* Slower fade out */
+}
+
+/* Class to hide it */
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 2. The SVG Loader */
+.heart-loader {
+    width: 250px; /* Slightly larger for better visibility */
+    height: 250px;
+    overflow: visible;
+    /* Stronger Neon Glow */
+    filter: drop-shadow(0 0 8px #ff0055) drop-shadow(0 0 15px #ff0055);
+    /* Centers the SVG content */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Variables for Animation */
+:root {
+    --loader-color: #ff3366; /* Neon Pink Stroke */
+    --heart-fill: #ff0055;   /* Deep Neon Red Fill */
+    --anim-dur: 8s;          /* SLOWED DOWN TO 8 SECONDS */
+}
+
+.heart-loader__group {
+    transform-origin: 30px 60px; /* Adjusted pivot point to keep it centered */
+    animation: group-anim var(--anim-dur) infinite;
+}
+
+.heart-loader__square {
+    stroke: var(--loader-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 240, 240;
+    stroke-dashoffset: 240;
+    animation: square-anim var(--anim-dur) infinite;
+}
+
+.heart-loader__circle {
+    stroke: var(--loader-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 188.522, 188.522;
+    stroke-dashoffset: 188.522;
+    transform-origin: 60px 30px;
+}
+
+.heart-loader__circle.m--left {
+    animation: left-circle-anim var(--anim-dur) infinite;
+}
+
+.heart-loader__circle.m--right {
+    animation: right-circle-anim var(--anim-dur) infinite;
+}
+
+.heart-loader__heartPath {
+    stroke: var(--heart-fill);
+    stroke-width: 2;
+    fill: transparent;
+    stroke-dasharray: 308.522, 308.522;
+    stroke-dashoffset: 308.522;
+    animation: heart-anim var(--anim-dur) infinite;
+}
+
+.loading-text {
+    color: #ff3366;
+    font-family: 'Special Elite', monospace;
+    margin-top: 40px; /* More space below the heart */
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    animation: pulse 2s infinite;
+    text-shadow: 0 0 8px #ff3366;
+}
+
+/* --- Keyframes --- */
+@keyframes square-anim {
+    12% { stroke-dashoffset: 0; }
+    43% { stroke-dashoffset: 0; opacity: 1; }
+    85% { stroke-dashoffset: 0; opacity: 0; }
+    100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes left-circle-anim {
+    12% { stroke-dashoffset: 188.522; }
+    31% { stroke-dashoffset: 0; transform: translateY(0); }
+    41% { stroke-dashoffset: 0; transform: translateY(-30px); }
+    43% { stroke-dashoffset: 0; transform: translateY(-30px); opacity: 1; }
+    85% { stroke-dashoffset: 0; transform: translateY(-30px); opacity: 0; }
+    100% { stroke-dashoffset: 0; transform: translateY(-30px); opacity: 0; }
+}
+
+@keyframes right-circle-anim {
+    12% { stroke-dashoffset: 188.522; }
+    31% { stroke-dashoffset: 0; transform: translateX(0); }
+    41% { stroke-dashoffset: 0; transform: translateX(30px); }
+    43% { stroke-dashoffset: 0; transform: translateX(30px); opacity: 1; }
+    85% { stroke-dashoffset: 0; transform: translateX(30px); opacity: 0; }
+    100% { stroke-dashoffset: 0; transform: translateX(30px); opacity: 0; }
+}
+
+@keyframes group-anim {
+    43% { transform: rotate(0); }
+    54% { transform: rotate(-45deg); } /* Rotates to form heart shape */
+    90% { transform: rotate(-45deg); opacity: 1; }
+    97% { transform: rotate(-45deg); opacity: 0; }
+    100% { transform: rotate(-45deg); opacity: 0; }
+}
+
+@keyframes heart-anim {
+    55% { stroke-dashoffset: 308.522; fill: transparent; }
+    70% { stroke-dashoffset: 0; fill: transparent; }
+    87% { stroke-dashoffset: 0; fill: var(--heart-fill); }
+    100% { stroke-dashoffset: 0; fill: var(--heart-fill); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.95); }
+}

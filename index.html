@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="preloader">
+      <svg
+        class="heart-loader"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 90 90"
+      >
+        <g class="heart-loader__group">
+          <path class="heart-loader__square" d="M0,30 0,90 60,90 60,30z" />
+          <path
+            class="heart-loader__circle m--left"
+            d="M60,60 a30,30 0 0,1 -60,0 a30,30 0 0,1 60,0"
+          />
+          <path
+            class="heart-loader__circle m--right"
+            d="M60,60 a30,30 0 0,1 -60,0 a30,30 0 0,1 60,0"
+          />
+          <path
+            class="heart-loader__heartPath"
+            d="M60,30 a30,30 0 0,1 0,60 L0,90 0,30 a30,30 0 0,1 60,0"
+          />
+        </g>
+      </svg>
+      <p class="loading-text">Loading Love...</p>
+    </div>
+
+    <div class="hearts-container"></div>
+
+    <button id="music-toggle" class="music-btn">🎵 Play Music</button>
+    <audio id="bg-music" loop>
+      <source src="assets/music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <main class="scroll-container">
+      <section id="hero" class="full-screen-section">
+        <div class="content-wrapper fade-in">
+          <h1>Happy Valentine's Day</h1>
+          <h2>I Love You</h2>
+          <p class="subtitle">
+            More than words. More than distance. More than yesterday.
+          </p>
+
+          <div class="timer-box">
+            <p class="timer-label">We've been falling in love for:</p>
+            <div id="timer-display">00 Days : 00 Hrs : 00 Mins : 00 Secs</div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <a href="#gallery" class="btn primary">Start the Journey</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="album" class="full-screen-section">
+        <div class="content-wrapper">
+          <h2>Our Storybook 📖</h2>
+          <p class="subtitle">Flip the pages to see our journey...</p>
+
+          <div class="book-container">
+            <button class="nav-btn prev-btn" onclick="goPrevPage()">❮</button>
+
+            <div id="book" class="book">
+              <div class="page" style="z-index: 3">
+                <div class="front cover-page">
+                  <h3>Our Journey</h3>
+                  <p>2025 - Forever</p>
+                  <div class="heart-decoration">❤️</div>
+                </div>
+                <div class="back">
+                  <img src="assets/photo1.png" alt="Memory 1" />
+                  <p class="handwritten">"Do you remember this day? 🤭"</p>
+                </div>
+              </div>
+
+              <div class="page" style="z-index: 2">
+                <div class="front">
+                  <img src="assets/photo2.jpeg" alt="Memory 2" />
+                  <p class="handwritten">
+                    "Our first proper date. You looked amazing."
+                  </p>
+                </div>
+                <div class="back">
+                  <img src="assets/photo3.png" alt="Memory 3" />
+                  <p class="handwritten">
+                    "Just us being silly. My favorite kind of moments."
+                  </p>
+                </div>
+              </div>
+
+              <div class="page" style="z-index: 1">
+                <div class="front">
+                  <div class="text-only-page">
+                    <h3>To be continued...</h3>
+                    <p>Every day is a new page with you.</p>
+                  </div>
+                </div>
+                <div class="back plain-page"></div>
+              </div>
+            </div>
+
+            <button class="nav-btn next-btn" onclick="goNextPage()">❯</button>
+          </div>
+          <p style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7">
+            (Tap arrows to flip pages)
+          </p>
+        </div>
+      </section>
+
+      <section id="coupons" class="full-screen-section">
+        <div class="content-wrapper">
+          <h2>Love Scratch Cards 🎰</h2>
+          <p class="subtitle">
+            Scratch to reveal your prize! (Screenshot when revealed)
+          </p>
+          <div class="coupon-grid">
+            <div class="scratch-container">
+              <div class="prize-content">
+                <h3>💆‍♀️ Prize!</h3>
+                <p>One Free Back Massage</p>
+              </div>
+              <canvas class="scratch-canvas" width="250" height="150"></canvas>
+              <div class="scratch-overlay-text">Scratch Me!</div>
+            </div>
+
+            <div class="scratch-container">
+              <div class="prize-content">
+                <h3>🍔 Prize!</h3>
+                <p>Dinner on Me</p>
+              </div>
+              <canvas class="scratch-canvas" width="250" height="150"></canvas>
+              <div class="scratch-overlay-text">Scratch Me!</div>
+            </div>
+
+            <div class="scratch-container">
+              <div class="prize-content">
+                <h3>🍿 Prize!</h3>
+                <p>You Pick the Movie</p>
+              </div>
+              <canvas class="scratch-canvas" width="250" height="150"></canvas>
+              <div class="scratch-overlay-text">Scratch Me!</div>
+            </div>
+            <div class="scratch-container">
+              <div class="prize-content">
+                <h3>👑 Jackpot!</h3>
+                <p>One Argument Win (Use wisely)</p>
+              </div>
+              <canvas class="scratch-canvas" width="250" height="150"></canvas>
+              <div class="scratch-overlay-text">Scratch Me!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="letters" class="full-screen-section">
+        <div class="content-wrapper">
+          <h2 id="letters-title">Letters To You</h2>
+
+          <div class="envelope-grid" id="envelope-grid">
+            <div class="envelope" onclick="openLetter('miss')">
+              <div class="wax-seal"></div>
+              <div class="body">
+                <p>Open when I miss you</p>
+              </div>
+            </div>
+            <div class="envelope" onclick="openLetter('sad')">
+              <div class="wax-seal"></div>
+              <div class="body">
+                <p>Open when you are sad</p>
+              </div>
+            </div>
+            <div class="envelope" onclick="openLetter('happy')">
+              <div class="wax-seal"></div>
+              <div class="body">
+                <p>Open when you are happy</p>
+              </div>
+            </div>
+          </div>
+
+          <div id="vintage-letter-view" class="vintage-letter hidden">
+            <span class="close-letter" onclick="closeLetter()">✖</span>
+            <div class="scroll-content">
+              <p id="letter-content" class="handwritten-text"></p>
+              <p class="signature">- Your love, Mohsin 💋</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="promises" class="full-screen-section">
+        <div class="content-wrapper">
+          <h2>Our Future</h2>
+          <div class="timeline">
+            <div class="checkpoint">
+              <h3>Travel Together</h3>
+              <p>Europe, Japan, Every place possible.</p>
+            </div>
+            <div class="checkpoint">
+              <h3>Build our Home</h3>
+              <p>A cozy place for us and ours 😉.</p>
+            </div>
+            <div class="checkpoint">
+              <h3>Grow Old Laughing</h3>
+              <p>Together just the way we are now.</p>
+            </div>
+          </div>
+          <br />
+          <a href="#shayri" class="btn secondary"
+            >(click) Specially for you ❤️</a
+          >
+        </div>
+      </section>
+
+      <section id="shayri" class="full-screen-section">
+        <div class="content-wrapper">
+          <div class="paper-card">
+            <h2>My Words for You</h2>
+            <div class="shayri-scroll-container">
+              <p class="shayri-text">
+                "Tujh se ishq hai,<br />
+                is baat se bhi ishq hai mujhe.<br />
+                <br />
+                ke main tere liye jo ban jaata hoon,<br />
+                Meri wou hayat pasand hai mujhe.<br />
+                <br />
+                Ittefaq kahu ya kismat ka koi ishara,<br />
+                Itni mumkin duniya mei tu hi Mila mujhe.<br />
+                <br />
+                Andheri raaton mei jab raah na dikhi,<br />
+                Teri chand si Roshni ne rah-e-ishq dikhaya mujhe.<br />
+                <br />
+                Tera naam loon toh saans thehar jaaye,<br />
+                yeh asar kyun itna gehra laga mujhe.<br />
+                <br />
+                Main pehle bhi zinda tha shayad,<br />
+                par tere saath jeena samajh aaya mujhe.<br />
+                <br />
+                Tu paas ho toh lafz kam pad jaate hain,<br />
+                khamoshi ka matlab samajh aaya mujhe.<br />
+                <br />
+                Hawaon mein jab tera ehsaas aaye,<br />
+                har saans mein mil jaati hai tu mujhe.<br />
+                <br />
+                Main jo tha kabhi be-rang sa,<br />
+                teri aamad ne rang diya mujhe."
+              </p>
+              <p class="signature">- Forever Yours</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div id="img-modal" class="modal">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <img class="modal-content" id="modal-img" />
+      <div id="modal-caption"></div>
+    </div>
+
+    <div id="letter-overlay" class="overlay hidden">
+      <div class="paper">
+        <span class="close-paper" onclick="closeLetter()">Close</span>
+        <p id="letter-text" class="typewriter"></p>
+        <p class="signature">Forever yours.</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
